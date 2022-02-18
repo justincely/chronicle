@@ -2,10 +2,12 @@ FROM ubuntu as base
 
 WORKDIR /app
 
-COPY . /app
+RUN apt-get update && apt-get install -y pip python
 
-RUN apt-get update && apt-get install pip
+COPY . /app
 
 RUN pip install -r requirements.txt
 
-RUN python manage.py runserver
+RUN python --version
+
+CMD ["python", "manage.py", "runserver"]
